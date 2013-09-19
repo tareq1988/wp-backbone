@@ -1,7 +1,3 @@
-function post_link(post) {
-    return '#/' + post.get('link').replace(wedevsBackbone.base, '');
-}
-
 (function($){
 
     $(function() {
@@ -73,11 +69,12 @@ function post_link(post) {
             el: '#content',
 
             initialize: function() {
-                console.log('initializing single post view');
+                // console.log('initializing single post view');
             },
 
-            fetchPost: function(post_id) {
+            fetchPost: function(post_id, type) {
                 self = this;
+                self.type = type;
 
                 this.model = new wp.api.models.Post({ 'ID': post_id });
                 this.model.fetch({
@@ -88,13 +85,18 @@ function post_link(post) {
             },
 
             render: function() {
-                var template = $('#single-post-view').html();
+                if (this.type === 'post') {
+                    var template = $('#single-post-view').html();
+                } else {
+                    var template = $('#single-page-view').html();
+                }
+
                 template = _.template(template, {
                     post: this.model
                 });
 
                 $(this.el).html(template);
-                PubSub.trigger('post:single', this.model);
+                PubSub.trigger('post:single:' + this.type, this.model);
                 scrollToTop();
             }
 
@@ -133,7 +135,7 @@ function post_link(post) {
             el: 'article #comments',
 
             initialize: function() {
-                PubSub.once('post:single', this.initComments, this);
+                PubSub.once('post:single:post', this.initComments, this);
             },
 
             initComments: function(model) {
@@ -158,13 +160,19 @@ function post_link(post) {
             routes: {
                 '/': 'home',
                 'posts/:id/*slug': 'singlePost',
+                'page/:id/*slug': 'singlePage',
+                'page/:id/*slug/*slug': 'singlePage',
                 'p/:id': 'paged',
                 '*actions': 'home'
             },
 
             singlePost: function(post_id, slug) {
-                new singlePostView().fetchPost(post_id);
+                new singlePostView().fetchPost(post_id, 'post');
                 new CommentView();
+            },
+
+            singlePage: function(post_id) {
+                new singlePostView().fetchPost(post_id, 'page');
             },
 
             home: function() {

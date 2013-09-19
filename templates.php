@@ -6,7 +6,7 @@
 
                 <article class="post">
                     <h2>
-                        <a data-id="{{ post.get('ID') }}" data-url="internal" href="{{ post_link( post ) }}">{{ post.get("title") }}</a>
+                        <a href="{{ post.get('link') }}">{{ post.get("title") }}</a>
                     </h2>
 
                     <div class="entry-meta">
@@ -53,6 +53,16 @@
             <div class="entry-content">{{ post.get('content') }}</div>
 
             <div id="comments">Loading...</div>
+        </article>
+    </div>
+</script>
+
+<script type="text/tmpl" id="single-page-view">
+    <div class="post-list">
+        <article class="post">
+            <h2>{{ post.get("title") }}</h2>
+
+            <div class="entry-content">{{ post.get('content') }}</div>
         </article>
     </div>
 </script>
