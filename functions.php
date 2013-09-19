@@ -33,12 +33,17 @@ class WeDevs_Bootstrap {
     function setup_theme() {
 
         /**
+         * Load bootstrap menu walker class
+         */
+        require_once dirname( __FILE__ ) . '/lib/bootstrap-walker.php';
+
+        /**
          * Make theme available for translation
          * Translations can be filed in the /languages/ directory
          * If you're building a theme based on Tareq\'s Planet - 2013, use a find and replace
          * to change 'tp' to the name of your theme in all the template files
          */
-        load_theme_textdomain( 'wedevs', get_template_directory() . '/languages' );
+        load_theme_textdomain( 'wpbb', get_template_directory() . '/languages' );
 
         /**
          * Add default posts and comments RSS feed links to head
@@ -54,7 +59,7 @@ class WeDevs_Bootstrap {
          * This theme uses wp_nav_menu() in one location.
          */
         register_nav_menus( array(
-            'primary' => __( 'Primary Menu', 'wedevs' ),
+            'primary' => __( 'Primary Menu', 'wpbb' ),
         ) );
 
         /**
@@ -96,7 +101,7 @@ class WeDevs_Bootstrap {
      */
     function widgets_init() {
         register_sidebar( array(
-            'name' => __( 'Sidebar', 'wedevs' ),
+            'name' => __( 'Sidebar', 'wpbb' ),
             'id' => 'sidebar-1',
             'before_widget' => '<aside id="%1$s" class="widget %2$s">',
             'after_widget' => '</aside>',
@@ -108,3 +113,33 @@ class WeDevs_Bootstrap {
 }
 
 $wedevs_bootstrap = new WeDevs_Bootstrap();
+
+/**
+ * Filter post links to fit our permalink structure
+ *
+ * @param string $permalink
+ * @return string permalink
+ */
+function wpbb_filter_post_link( $permalink ) {
+    $permalink =  str_replace( home_url(), home_url('/#'), $permalink );
+
+    return $permalink;
+}
+
+add_filter( 'post_link', 'wpbb_filter_post_link' );
+
+/**
+ * Filter page links to fit our permalink structure
+ *
+ * @param string $permalink
+ * @param int $page_id
+ * @return string permalink
+ */
+function wpbb_filter_page_link( $permalink, $page_id ) {
+    $permalink =  str_replace( home_url(), home_url( '/#/page/' . $page_id ), $permalink );
+
+    return $permalink;
+}
+
+add_filter( 'page_link', 'wpbb_filter_page_link', 10, 2 );
+

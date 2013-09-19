@@ -56,6 +56,21 @@
                     </div><!-- .span12 -->
                 </div><!-- .row -->
             </div><!-- .container -->
+
+            <div class="menu-container">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <nav role="navigation" class="site-navigation main-navigation clearfix">
+                                <h1 class="assistive-text"><i class="icon-reorder"></i> <?php _e( 'Menu', 'wedevs' ); ?></h1>
+                                <div class="assistive-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'wedevs' ); ?>"><?php _e( 'Skip to content', 'wedevs' ); ?></a></div>
+
+                                <?php wp_nav_menu( array('theme_location' => 'primary', 'container_id' => 'navigation', 'container_class' => 'site-main-menu', 'walker' => new Bootstrap_Walker_Nav_Menu()) ); ?>
+                            </nav><!-- .site-navigation .main-navigation -->
+                        </div><!-- .span12 -->
+                    </div><!-- .row -->
+                </div><!-- .container -->
+            </div> <!-- .menu-container -->
         </header><!-- #masthead .site-header -->
 
         <div id="main" class="site-main">
