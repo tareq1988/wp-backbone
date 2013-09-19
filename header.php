@@ -48,7 +48,7 @@
         <header id="masthead" class="site-header" role="banner">
             <div class="container">
                 <div class="row">
-                    <div class="span12">
+                    <div class="span12 header">
                         <hgroup>
                             <h1 class="site-title"><a href="<?php echo home_url( '#/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?> <small> - <?php bloginfo( 'description' ); ?></small></a></h1>
                         </hgroup>

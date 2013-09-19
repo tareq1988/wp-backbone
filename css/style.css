@@ -151,6 +151,7 @@ p {
 .site-header .header {
   margin-bottom: 10px;
   overflow: hidden;
+  border-bottom: 1px solid #dddddd;
 }
 .site-header h1.site-title {
   font-size: 32px;
