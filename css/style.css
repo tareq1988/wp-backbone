@@ -149,9 +149,7 @@ p {
   position: relative;
 }
 .site-header .header {
-  margin-bottom: 10px;
   overflow: hidden;
-  border-bottom: 1px solid #dddddd;
 }
 .site-header h1.site-title {
   font-size: 32px;
@@ -164,12 +162,12 @@ p {
   text-decoration: none;
 }
 .site-header .divider {
-  border-left: 1px solid #dedede;
-  border-right: 1px solid #bababa;
+  border-left: 1px solid #787878;
+  border-right: 1px solid #545454;
 }
 .site-header .site-navigation {
   position: relative;
-  background: #cccccc;
+  background: #666666;
   height: 36px;
 }
 .site-header .menu-container {
@@ -280,7 +278,7 @@ p {
   height: 0;
 }
 .site-header #navigation li:hover {
-  background: #f2f2f2;
+  background: #8c8c8c;
 }
 .site-header #navigation li:hover a {
   text-shadow: none;
@@ -306,7 +304,7 @@ p {
 }
 .site-header #navigation li:hover ul.sub-menu li a {
   background: #fff;
-  color: #cccccc;
+  color: #666666;
 }
 .site-header #navigation li:hover ul.sub-menu li a:hover {
   text-shadow: 0 1px 0 #fff;
@@ -329,11 +327,11 @@ p {
   text-shadow: none;
 }
 .site-header #navigation > ul > li {
-  border-left: 1px solid #dedede;
-  border-right: 1px solid #bababa;
+  border-left: 1px solid #787878;
+  border-right: 1px solid #545454;
 }
 .site-header #navigation > ul > li.current-menu-item > a {
-  background: #999999;
+  background: #333333;
   text-shadow: none;
   font-weight: bold;
 }
@@ -361,7 +359,7 @@ p {
     margin-top: 5px;
   }
   .site-header #navigation {
-    background: #cccccc;
+    background: #666666;
     width: 100%;
     overflow: hidden;
   }
@@ -379,7 +377,7 @@ p {
     overflow: hidden;
   }
   .site-header #navigation li a {
-    background: #cccccc;
+    background: #666666;
   }
   .site-header #navigation > ul > li {
     border-left: none;
@@ -493,7 +491,7 @@ p {
   color: #fff;
   padding: 5px 15px;
   margin-left: 20px;
-  background: #cccccc;
+  background: #666666;
 }
 #comments #respond label {
   display: inline-block;
@@ -587,7 +585,7 @@ p {
 #comments ol.commentlist li article.comment .reply a.comment-reply-link {
   color: #fff;
   padding: 3px 8px;
-  background: #cccccc;
+  background: #666666;
   font-size: 13px;
 }
 #comments ol.commentlist li .comment-content {
@@ -621,7 +619,7 @@ p {
   border-bottom: none;
 }
 #comments ol.commentlist li.bypostauthor > article {
-  background: #ffffff;
+  background: #e6e6e6;
 }
 /*--------------------------------------------------
 :: Sidebars
