@@ -92,7 +92,7 @@ get_header();
                     <article class="comment">
                         <footer>
                             <div class="comment-author vcard">
-                                <div class="comment-avatar">{{ comment.get('author').avatar }}</div>
+                                <div class="comment-avatar"><img class="avatar" src="{{ comment.get('author').avatar }}" alt="avatar" /></div>
 
                                 <cite class="fn">{{ comment.get('author').name }} </cite> <span class="says">says:</span>
                             </div>
