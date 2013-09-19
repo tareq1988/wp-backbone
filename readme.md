@@ -26,4 +26,4 @@ Right now only it only can do the following
 Contribute if you feel anything should or can be improved :-)
 
 ## Author
-[Tareq Hasa](http://tareq.wedevs.com)
+[Tareq Hasan](http://tareq.wedevs.com)
