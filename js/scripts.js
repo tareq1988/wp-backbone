@@ -13,6 +13,12 @@ function post_link(post) {
             return this;
         }
 
+        var scrollToTop = function() {
+            $('html, body').animate({
+                scrollTop: $("#masthead").offset().top
+            }, 100);
+        };
+
         _.templateSettings = {
             evaluate : /\{\[([\s\S]+?)\]\}/g,
             interpolate : /\{\{([\s\S]+?)\}\}/g
@@ -59,6 +65,7 @@ function post_link(post) {
                 });
 
                 $(this.el).html(template);
+                scrollToTop();
             }
         });
 
@@ -88,6 +95,7 @@ function post_link(post) {
 
                 $(this.el).html(template);
                 PubSub.trigger('post:single', this.model);
+                scrollToTop();
             }
 
         });
