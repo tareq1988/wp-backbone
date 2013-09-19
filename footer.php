@@ -21,8 +21,6 @@
 
                     &copy; 2008-<?php echo date( 'Y' ) ?> <a href="http://tareq.wedevs.com">Tareq Hasan</a>. All rights are reserved.
                     Powered by <a href="http://wordpress.org/" target="_blank" title="<?php esc_attr_e( 'A Semantic Personal Publishing Platform', 'wedevs' ); ?>" rel="generator"><?php printf( __( '%s', 'wedevs' ), 'WordPress' ); ?></a>.
-
-                    <?php echo wedevs_get_option( 'footer_text', 'tp_settings' ); ?>
                 </div><!-- .site-info -->
             </div>
         </div><!-- .row -->
