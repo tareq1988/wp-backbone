@@ -500,6 +500,14 @@ p {
 #comments #respond label {
   display: inline-block;
 }
+#comments #respond .invalid {
+  border: 1px solid red;
+  background: #ffcccc;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding: 10px;
+}
 #comments #respond .required {
   color: #E44400;
 }

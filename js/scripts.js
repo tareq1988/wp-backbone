@@ -72,6 +72,65 @@
                 // console.log('initializing single post view');
             },
 
+            events: {
+                'submit #commentform': 'submitComment'
+            },
+
+            submitComment: function(e) {
+                e.preventDefault();
+
+                var errors = [],
+                    self = this,
+                    hasError = false,
+                    form = $(e.currentTarget),
+                    comment = form.find('textarea#comment').val();
+
+                // remove previous errors
+                form.find('.error').remove();
+                var invalid = ['.comment-form-author', '.comment-form-email', '.comment-form-comment'];
+                $.each(invalid, function(i, item) {
+                    $(item).removeClass('invalid');
+                });
+
+                if (wedevsBackbone.loggedin === 'no') {
+                    var email = form.find('input#email').val();
+                    var author = form.find('input#author').val();
+
+                    if (author === '' ) {
+                        hasError = true;
+                        form.find('.comment-form-author')
+                            .addClass('invalid')
+                            .append('<div class="error">Error: please type a comment.</div>');
+                    }
+
+                    if( email === '' ) {
+                        hasError = true;
+                        form.find('.comment-form-email')
+                        .addClass('invalid')
+                        .append('<div class="error">Error: please type a comment.</div>');
+                    }
+                }
+
+                if (comment === '' ) {
+                    hasError = true;
+                    form.find('.comment-form-comment')
+                    .addClass('invalid')
+                    .append('<div class="error">Error: please type a comment.</div>')
+                }
+
+                if (!hasError) {
+                    var data = form.serialize() + '&action=wpbb_new_comment';
+                    $.post(wedevsBackbone.ajaxurl, data, function(resp) {
+                        if (resp.success === false) {
+                            alert(resp.data);
+                        } else {
+                            // re render the comment view
+                            new CommentView().initComments(self.model);
+                        }
+                    });
+                }
+            },
+
             fetchPost: function(post_id, type) {
                 self = this;
                 self.type = type;
@@ -123,25 +182,31 @@
         var Comments = Backbone.Collection.extend({
             model: Comment,
             url: function() {
-                return wpApiOptions.base + '/posts/' + this.post_id + '/comments';
+                return wpApiOptions.base + '/posts/' + this.post.id + '/comments';
             },
 
-            initialize: function(post_id) {
-                this.post_id = post_id;
+            comparator: function(comment) {
+                return comment.get('date');
+            },
+
+            initialize: function(post) {
+                this.post = post;
             }
         });
 
         var CommentView = Backbone.View.extend({
-            el: 'article #comments',
 
             initialize: function() {
+                this.el = '#comments';
+
                 PubSub.once('post:single:post', this.initComments, this);
             },
 
             initComments: function(model) {
                 var self = this;
+                self.post = model;
 
-                this.collection = new Comments(model.id);
+                this.collection = new Comments(model);
                 this.collection.fetch({
                     success: function() {
                         self.render();
@@ -151,8 +216,12 @@
 
             render: function() {
                 var template = $('#comments-view').html();
-                template = _.template(template, { comments: this.collection.models });
-                $('article #comments').html(template);
+                template = _.template(template, {
+                    comments: this.collection.models,
+                    post: this.post
+                });
+
+                $(this.el).html(template);
             }
         });
 
@@ -185,7 +254,7 @@
 
         });
 
-        new AppRouter();
+        var App = new AppRouter();
         Backbone.history.start();
 
         $('.loading').center();
