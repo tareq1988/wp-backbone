@@ -182,7 +182,7 @@
         var Comments = Backbone.Collection.extend({
             model: Comment,
             url: function() {
-                return wpApiOptions.base + '/posts/' + this.post.id + '/comments';
+                return WP_API_Settings.root + '/posts/' + this.post.id + '/comments';
             },
 
             comparator: function(comment) {
