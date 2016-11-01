@@ -105,6 +105,11 @@
 
         <div id="respond" class="comment-respond">
             <form action="<?php //echo site_url( '/wp-comments-post.php' ); ?>" method="post" id="commentform" class="comment-form">
+                
+                <?php 
+                    $req      = get_option( 'require_name_email' );
+                    $aria_req = ( $req ? " required='required'" : '' );
+                ?>
                 <?php if ( is_user_logged_in() ) : ?>
                     You are logged in
                 <?php else : ?>
@@ -113,8 +118,6 @@
                     $user = wp_get_current_user();
                     $user_identity = $user->exists() ? $user->display_name : '';
 
-                    $req      = get_option( 'require_name_email' );
-                    $aria_req = ( $req ? " required='required'" : '' );
                     $html5    = true;
                     $fields   =  array(
                         'author' => '<p class="comment-form-author">' . '<label for="author">' . __( 'Name' ) . ( $req ? ' <span class="required">*</span>' : '' ) . '</label> ' .
