@@ -7,12 +7,14 @@
  * @package _bootstraps
  * @package _bootstraps - 2013 1.0
  */
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><?php
+<title>
+    <?php
 	/*
 	 * Print the <title> tag based on what is being viewed.
 	 */
@@ -32,7 +34,8 @@
 	if ( $paged >= 2 || $page >= 2 )
 		echo ' | ' . sprintf( __( 'Page %s', 'wedevs' ), max( $paged, $page ) );
 
-	?></title>
+	?>
+</title>
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 <!--[if lt IE 9]>
@@ -65,7 +68,18 @@
                                 <h1 class="assistive-text"><i class="icon-reorder"></i> <?php _e( 'Menu', 'wedevs' ); ?></h1>
                                 <div class="assistive-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'wedevs' ); ?>"><?php _e( 'Skip to content', 'wedevs' ); ?></a></div>
 
-                                <?php wp_nav_menu( array('theme_location' => 'primary', 'container_id' => 'navigation', 'container_class' => 'site-main-menu', 'walker' => new Bootstrap_Walker_Nav_Menu()) ); ?>
+                                <?php 
+                                if( has_nav_menu('primary') ) {
+                                    wp_nav_menu( 
+                                        array(
+                                            'theme_location'    => 'primary', 
+                                            'container_id'      => 'navigation', 
+                                            'container_class'   => 'site-main-menu', 
+                                            'walker'            => new Bootstrap_Walker_Nav_Menu()
+                                        ) 
+                                    );
+                                }
+                                ?>
                             </nav><!-- .site-navigation .main-navigation -->
                         </div><!-- .span12 -->
                     </div><!-- .row -->
