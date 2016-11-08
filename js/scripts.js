@@ -1,5 +1,6 @@
 (function($){
-
+    'use strict';
+    
     $(function() {
 
         $.fn.center = function () {
@@ -7,7 +8,7 @@
             this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()) + "px");
 
             return this;
-        }
+        };
 
         var scrollToTop = function() {
             $('html, body').animate({
@@ -53,12 +54,14 @@
             render: function() {
                 var template = $('#home-view').html();
 
-                template = _.template(template, {
+                template = _.template(template);
+                var data = {
                     posts: this.collection.models,
                     pages: this.totalPages,
                     total: this.total,
                     currentPage: this.currentPage
-                });
+                };
+                var template = template(data);
 
                 $(this.el).html(template);
                 scrollToTop();
@@ -132,7 +135,7 @@
             },
 
             fetchPost: function(post_id, type) {
-                self = this;
+                var self = this;
                 self.type = type;
 
                 this.model = new wp.api.models.Post({ 'ID': post_id });
@@ -150,11 +153,14 @@
                     var template = $('#single-page-view').html();
                 }
 
-                template = _.template(template, {
+                var template = _.template(template);
+                var data = {
                     post: this.model
-                });
+                };
+                var template = template(data);
 
                 $(this.el).html(template);
+
                 PubSub.trigger('post:single:' + this.type, this.model);
                 scrollToTop();
             }
@@ -216,11 +222,12 @@
 
             render: function() {
                 var template = $('#comments-view').html();
-                template = _.template(template, {
+                var template = _.template(template);
+                var data = {
                     comments: this.collection.models,
                     post: this.post
-                });
-
+                };
+                var template = template(data);
                 $(this.el).html(template);
             }
         });
@@ -270,4 +277,3 @@
 
     });
 })(jQuery);
-
